@@ -7,21 +7,21 @@ apply plugin: 'kotlin-android-extensions'
 android {
     compileSdkVersion 28
     defaultConfig {
-        applicationId "works.bjh.study.jetpack"
+        setApplicationId("works.bjh.study.jetpack")
         minSdkVersion 26
         targetSdkVersion 28
-        versionCode 1
-        versionName "1.0"
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        setVersionCode(1)
+        setVersionName("1.0")
+        setTestInstrumentationRunner("android.support.test.runner.AndroidJUnitRunner")
         externalNativeBuild {
             cmake {
-                cppFlags ""
+                cppFlags [""]
             }
         }
     }
     buildTypes {
         release {
-            minifyEnabled false
+            setMinifyEnabled(false)
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
@@ -33,9 +33,12 @@ android {
 }
 
 dependencies {
+    def support_version = "28.0.0"
+
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation"org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
-    implementation 'com.android.support:appcompat-v7:28.0.0'
+    implementation"org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation "com.android.support:appcompat-v7:$support_version"
+    implementation "com.android.support:design:$support_version"
     implementation 'com.android.support.constraint:constraint-layout:1.1.3'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
