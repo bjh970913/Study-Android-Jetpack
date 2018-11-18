@@ -10,9 +10,9 @@ android {
         setApplicationId("works.bjh.study.jetpack")
         minSdkVersion 26
         targetSdkVersion 28
-        setVersionCode(1)
-        setVersionName("1.0")
-        setTestInstrumentationRunner("android.support.test.runner.AndroidJUnitRunner")
+        versionCode = 1
+        versionName = "1.0"
+        testInstrumentationRunner = "android.support.test.runner.AndroidJUnitRunner"
         externalNativeBuild {
             cmake {
                 cppFlags [""]
@@ -21,7 +21,7 @@ android {
     }
     buildTypes {
         release {
-            setMinifyEnabled(false)
+            minifyEnabled = false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
@@ -29,6 +29,9 @@ android {
         cmake {
             path "CMakeLists.txt"
         }
+    }
+    dataBinding {
+        enabled = true
     }
 }
 

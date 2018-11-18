@@ -1,32 +1,41 @@
 package works.bjh.study.jetpack
 
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import kotlinx.android.synthetic.main.activity_main.*
+import android.support.v7.app.AppCompatActivity
+import android.util.Log
+import android.view.View
+import works.bjh.study.jetpack.databinding.LayoutUserBinding
+import works.bjh.study.jetpack.model.User
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), OnMainActivityAddClick {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+//        val binding: LayoutUserBinding = DataBindingUtil.setContentView(this, R.layout.layout_user)
 
+        val binding = LayoutUserBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-        sample_text.text = getString(R.string.string_hello)
-        // Example of a call to a native method
-//        sample_text.text = stringFromJNI()
+        user = User("Ji Hun", "Baek", 1)
+        binding.user = user
+
+        binding.userClickHandler = OtherOnAddHandler()
+        binding.mainActivity = this
     }
 
-    /**
-     * A native method that is implemented by the 'native-lib' native library,
-     * which is packaged with this application.
-     */
-//    external fun stringFromJNI(): String
+    private lateinit var user: User
 
-//    companion object {
+    override fun onUserCLick(view: View) {
+        Log.i("onCLick Event", "Main Activity got event")
+    }
+}
 
-        // Used to load the 'native-lib' library on application startup.
-//        init {
-//            System.loadLibrary("native-lib")
-//        }
-//    }
+class OtherOnAddHandler : OnMainActivityAddClick {
+    override fun onUserCLick(view: View) {
+        Log.i("onCLick Event", "Other implementation got event")
+    }
+}
+
+interface OnMainActivityAddClick {
+    fun onUserCLick(view: View)
 }
